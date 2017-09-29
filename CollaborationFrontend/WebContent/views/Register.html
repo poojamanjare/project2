@@ -1,0 +1,47 @@
+<div class="container">
+<span style="color: red" ng-if="error.code==1">{{error.message}}</span>
+
+<form>
+<h2>Please Sign up here...!!!</h2>
+<div class="form-group">
+Enter Username:
+<input type="text" ng-model="users.userId" class="form-control">
+<span style="color: red" ng-if="error.code==2">{{error.message}}</span>
+</div>
+
+<div class="form-group">
+Enter Password:
+<input type="password" ng-model="users.password" class="form-control">
+</div>
+
+<div class="form-group">
+Enter Firstname:
+<input type="text" ng-model="users.firstname" class="form-control">
+</div>
+
+<div class="form-group">
+Enter Lastname:
+<input type="text" ng-model="users.lastname" class="form-control">
+</div>
+
+<div class="form-group">
+Enter Email:
+<input type="email" ng-model="users.email" class="form-control">
+<span style="color: red" ng-if="error.code==3">{{error.message}}</span>
+</div>
+
+<div class="form-group">
+Enter Phone Number:
+<input type="text" ng-model="users.phonenumber" class="form-control">
+</div>
+
+<div class="form-group">
+Select Role:
+<input type="radio" ng-model="users.role" value="STUDENT">Student
+<input type="radio" ng-model="users.role" value="EMPLOYEE">Employee
+<input type="radio" ng-model="users.role" value="ALUMINI">Alumini
+</div>
+
+<input type="submit" value="Register" ng-click="createUsers()">
+</form>
+</div>

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.collaborate.DAO.UsersDAO;
+import com.collaborate.Services.UserService;
 import com.collaborate.model.Users;
+import com.collaborate.model.Error;
 
 @RestController
 public class UserController 
@@ -21,23 +23,47 @@ public class UserController
 	@Autowired
 	UsersDAO usersDAO;
 	
+	@Autowired
+	UserService userService;
+	
 	//============method for creating user===============================
 	@PostMapping(value="/createUsers")
-	public ResponseEntity<String>createUsers(@RequestBody Users users)
+	public ResponseEntity<?>createUsers(@RequestBody Users users)
 	{
-		users.setRole("USER_ROLE");
-		users.setStatus("NA");
-		users.setIsOnline("NO");
-		
-		if(usersDAO.createUsers(users))
+		System.out.println("##################"+users.getUserId()+"##############");
+		if(!userService.isUserIdValid(users.getUserId()))
 		{
-			return new ResponseEntity<String>("User created successfully", HttpStatus.OK);
+			Error error=new Error(2,"Username already exists...Please enter different username");
+			return new ResponseEntity<Error>(error,HttpStatus.NOT_ACCEPTABLE);//500
+		}
+		if(!userService.isEmailValid(users.getEmail()))
+		{
+			Error error=new Error(3, "Email already exists...Please enter different email-Id");
+			return new ResponseEntity<Error>(error,HttpStatus.NOT_ACCEPTABLE);
+		}
+		boolean result=userService.createUsers(users);
+		System.out.println("result is::"+result);
+		if(result)
+		{
+			return new ResponseEntity<Users>(users,HttpStatus.OK);//200-299
 		}
 		else
 		{
-			return new ResponseEntity<String>("Problem in creating users", HttpStatus.NOT_ACCEPTABLE);
+			Error error=new Error(1, "Unable to register user details");
+			return new ResponseEntity<Error>(error,HttpStatus.INTERNAL_SERVER_ERROR);//500
 		}
-		
+	}
+	//============login=================================
+	@PostMapping(value="/Login")
+	public ResponseEntity<?>Login(@RequestBody Users users)
+	{
+		Users validuser=usersDAO.login(users);
+		if(validuser==null)
+		{
+			Error error=new Error(4, "invalid Username/Password...");
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+		}
+		return new ResponseEntity<Users>(validuser,HttpStatus.OK);
 	}
 	
 	//=============method for getting user by userid=====================
@@ -110,5 +136,6 @@ public class UserController
 			return new ResponseEntity<String>("Problem in deleting user", HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
+	
 
 }
