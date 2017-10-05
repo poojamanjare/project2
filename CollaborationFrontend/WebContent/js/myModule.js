@@ -1,4 +1,4 @@
-var myApp=angular.module("myModule",["ngRoute"])
+var myApp=angular.module("myModule",["ngRoute","ngCookies"])
 myApp.config(function($routeProvider)
 	{
 		$routeProvider
@@ -26,8 +26,42 @@ myApp.config(function($routeProvider)
 				controller:"UserController"				
 			})
 			
+			.when("/editProfile",{
+				templateUrl:"views/EditProfile.html",
+				controller:"UserController"				
+			})
+			
+						
 			.otherwise({
 				templateUrl:"views/Home.html"
 			})
 				
 	})
+	
+	myApp.run(function($rootScope,$cookieStore,UserService,$location)
+	
+		{
+			if($rootScope.currentUser==undefined)
+				$rootScope.currentUser=$cookieStore.get('userDetails')
+				
+			$rootScope.Logout=function()
+			{
+				UserService.Logout().then(
+									function(response)
+									{
+											delete $rootScope.currentUser;
+											$cookieStore.remove('userDetails')
+											$location.path('/Login')
+									}
+									,function(response)
+									{
+											console.log(response.status)
+											if(response.status==401)
+												{
+														delete $rootScope.currentUser;
+														$cookieStore.remove('userDetails')
+														$location.path('/Login')
+												}
+									})
+			}
+		})

@@ -1,7 +1,7 @@
 /**
  * UserController
  */
-myApp.controller('UserController',function($scope,UserService,$location)
+myApp.controller('UserController',function($scope,UserService,$location,$rootScope,$cookieStore)
 		{
 	
 			$scope.createUsers=function()
@@ -36,6 +36,8 @@ myApp.controller('UserController',function($scope,UserService,$location)
 						function(response)
 						{
 							alert("success response::"+response);
+							$rootScope.currentUser=response.data
+							$cookieStore.put('userDetails',response.data)
 							console.log(response.data)
 							console.log(response.status)
 							$location.path('/Home')
@@ -50,27 +52,45 @@ myApp.controller('UserController',function($scope,UserService,$location)
 						}
 				)
 			}
+			$scope.updateUser=function()
+			{
+				UserService.updateUser($scope.users)
+				.then
+				(
+						function(response)
+						{
+							alert("user Details get updated successfully...!!!");
+							$location.path('/Home')
+						}
+						,function(response)
+						{
+							alert("failure response");
+							if(response.status==401)
+							{
+								$location.path('/Login')
+							}
+							else
+							{
+								$scope.error=response.data
+								$location.path('/Editprofile')
+							}	
+						}
+				)
+			}
+			if($rootScope.currentUser!=undefined)
+			{
+				UserService.getUser()
+				.then
+				(
+						function(response)
+						{
+							alert("success response"+users.getUser)
+							$scope.users=response.data
+						}
+						,function(response)
+						{
+							console.log(response.status)
+						}
+				)
+			}
 		})
-
-/*$scope.login=function()
-{
-	console.log($scope.userobj)
-	UserService.login($scope.userobj).then(function(response){
-	
-		$location.path('/home')
-	},function(response)
-	{
-		$scope.error="Invalid Username/password"   you can write this also
-			$scope.error=response.data.message
-			$location.path('/login')
-			
-	}
-	
-	
-	
-	)
-	
-	}
-*/
-
-

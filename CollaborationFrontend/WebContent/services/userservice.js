@@ -7,7 +7,7 @@ myApp.factory('UserService',function($http)
 			var BASE_URL="http://localhost:8085/CollaborationRestServices"
 				UserService.createUsers=function(users)
 				{
-					/*alert(users);*/
+					/*alert(users.userId);*/
 					return $http.post(BASE_URL+"/createUsers",users)
 				}
 			
@@ -15,5 +15,24 @@ myApp.factory('UserService',function($http)
 				{
 					return $http.post(BASE_URL+"/Login",userobj)
 				}
+				
+				UserService.Logout=function()
+				{
+					return $http.put(BASE_URL+"/Logout")
+				}
+				
+				UserService.getUser=function()
+				{
+					return $http.get(BASE_URL+"/getUser")
+				}
+				
+				UserService.updateUser=function(users)
+				{
+					return $http.put(BASE_URL+"/updateUser",users)
+				}
+				
+				
+				
+				
 			return UserService;
 		})

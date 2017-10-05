@@ -8,9 +8,10 @@ background-image: url("images/wall3.jpg");
 background-size: cover;  
 }
 </style>
-<meta charset="ISO-8859-1">
+<meta charset="utf-8">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js">></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.js"></script>
 <script src="js/myModule.js"></script>
 <script src="controller/usercontroller.js"></script>
 <script src="services/userservice.js"></script>
@@ -34,15 +35,17 @@ background-size: cover;
       			<ul class="nav navbar-nav">
     					<li class="active"></li>
     					<li><a href="#/Home">Home</a></li>
-						
 						<li><a href="#/AboutUs">About Us</a></li>
 						<li><a href="#/ContactUs">Contact Us</a></li>
+						<li><a href="#/editProfile" ng-show="currentUser.userId">Edit Profile</a></li>
 				</ul>
 			
 				<div>
      				<ul class="nav navbar-nav navbar-right">
-     					<li><a href="#/Login">Sign In</a></li>
-						<li><a href="#/Register">Sign Up</a></li>
+     					<li><a href="#/Login" ng-hide="currentUser.userId">Sign In</a></li>
+     					<li><a href="#" ng-click="Logout()" ng-show="currentUser.userId">Logout</a></li>
+						<li><a href="#/Register" ng-hide="currentUser.userId">Sign Up</a></li>
+						<li><a href="#" ng-show="currentUser.userId">Welcome {{currentUser.userId}}</a></li>
      				</ul>
 				</div>
 			</div>

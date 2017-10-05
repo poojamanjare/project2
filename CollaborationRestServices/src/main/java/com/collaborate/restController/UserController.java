@@ -3,12 +3,15 @@ package com.collaborate.restController;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +19,7 @@ import com.collaborate.DAO.UsersDAO;
 import com.collaborate.Services.UserService;
 import com.collaborate.model.Users;
 import com.collaborate.model.Error;
+
 
 @RestController
 public class UserController 
@@ -55,16 +59,104 @@ public class UserController
 	}
 	//============login=================================
 	@PostMapping(value="/Login")
-	public ResponseEntity<?>Login(@RequestBody Users users)
+	public ResponseEntity<?>Login(@RequestBody Users users,HttpSession session)
 	{
 		Users validuser=usersDAO.login(users);
-		if(validuser==null)
+		if(validuser==null)		//invalid Username/password
 		{
 			Error error=new Error(4, "invalid Username/Password...");
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);	//error 2nd callback function
+			//response.data=error
+			//response.status=401
+		}
+		System.out.println("Online status before update::"+validuser.getIsOnline());//No
+		validuser.setIsOnline("Yes");
+		try
+		{
+			System.out.println("is validated...........");
+			userService.update(validuser);
+		}
+		catch(Exception e)
+		{
+			Error error=new Error(6, "unable to update online status...");
+			return new ResponseEntity<Error>(error,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		System.out.println("Online status after update::"+validuser.getIsOnline());//yes
+		session.setAttribute("userId",validuser.getUserId());
+		return new ResponseEntity<Users>(validuser,HttpStatus.OK);	//success 1st callback function
+	}
+	//=========================logout=============================================================
+	@PutMapping(value="/Logout")
+	public ResponseEntity<?>Logout(HttpSession session)
+	{
+		String userId=(String) session.getAttribute("userId");//this statement return null value
+		System.out.println("Name of user is::"+userId);
+		if(userId==null)
+		{
+			Error error=new Error(5, "Unauthorized access...please login first");
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 		}
-		return new ResponseEntity<Users>(validuser,HttpStatus.OK);
+		Users users=userService.getUsers(userId);
+		try{
+		users.setIsOnline("No");
+		userService.update(users);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		session.removeAttribute("userId");
+		session.invalidate();
+		return new ResponseEntity<String>("Logout", HttpStatus.OK);
+		
 	}
+	//===========================get user===========================================
+	@GetMapping(value="/getUser")
+	public ResponseEntity<?>getUser(HttpSession session)
+	{
+		String userId=(String) session.getAttribute("userId");
+		if(userId==null)
+		{
+			Error error=new Error(7, "Unauthorized access...please login first");
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+		}
+		Users users=userService.getUserByUserId(userId);
+		return new ResponseEntity<Users>(users,HttpStatus.OK);
+	}
+	//===================update user profile==================================
+	@PutMapping(value="/updateUser")
+	public ResponseEntity<?>updateUser(@RequestBody Users users,HttpSession session)
+	{
+		String userId=(String) session.getAttribute("userId");
+		if(userId==null)
+		{
+			Error error=new Error(7, "Unauthorized access...please login first");
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+		}
+		if(!userService.isEmailValid(users.getEmail()))
+		{
+			Error error=new Error(3, "Email already exists...Please enter different email-Id");
+			return new ResponseEntity<Error>(error,HttpStatus.NOT_ACCEPTABLE);
+			
+		}
+		
+		try
+		{
+			userService.update(users);
+			return new ResponseEntity<Users>(users,HttpStatus.OK);
+			
+		}
+		catch(Exception e)
+		{
+			Error error=new Error(1, "Unable to register user details");
+			return new ResponseEntity<Error>(error,HttpStatus.INTERNAL_SERVER_ERROR);//500
+		}
+	}
+	
+	
+	
+	
+	
+	
 	
 	//=============method for getting user by userid=====================
 	@GetMapping(value="/getUserById/{userid}")
