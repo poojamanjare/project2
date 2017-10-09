@@ -31,6 +31,28 @@ myApp.config(function($routeProvider)
 				controller:"UserController"				
 			})
 			
+			.when("/addBlogPost",{
+				templateUrl:"views/BlogPostForm.html",
+				controller:"BlogPostController"				
+			})
+			
+			.when("/getBlogs",{
+				templateUrl:"views/blogslist.html",
+				controller:"BlogPostController"				
+			})
+			
+			
+			
+			.when("/getBlogById/:blogId",{		//blogs approved
+				templateUrl:"views/blogDetails.html",		//details of approved blogs //blogPost + approval form
+				controller:"BlogPostDetailController"		//$scope.blogPost=select * from blogPost where id=?		
+			})
+			
+			.when("/getApprovalForm/:blogId",{ //blogs waiting for approval
+				templateUrl:"views/blogApprovalForm.html",//blogPost + textarea
+				controller:"BlogPostDetailController"	//$scope.blogPost=select * from blogPost where id=?			
+			})
+			
 						
 			.otherwise({
 				templateUrl:"views/Home.html"

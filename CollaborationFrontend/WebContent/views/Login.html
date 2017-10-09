@@ -1,7 +1,10 @@
 <div class="container">
 <span style="color: red">{{error}}</span>
 <form>
-<h2>Please Sign In Here...!!!</h2>
+<h2 align="center">Login Here</h2>
+<div class="imgcontainer" align="center">
+    <img src="images/userIcon.png" alt="Avatar" class="avatar" height="25%" width="30%">
+</div>
 <div class="form-group">
 Enter Username : <input type="text" ng-model="userobj.userId" class="form-control">
 </div>
@@ -11,5 +14,6 @@ Enter password : <input type="password" ng-model="userobj.password" class="form-
 </div>
 
 <input type="submit" ng-click="Login()">
+<p class="message">Not registered? <a href="#/Register">Create an account</a></p>
 </form>
 </div>

@@ -1,0 +1,39 @@
+<div ng-show="currentUser.role=='admin'">         <!-- if login user role is admin then show this table -->
+<B>Lists of Blogs Waiting for approval</B>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Blogs Title</th>
+<th>Author</th>
+<th>posted on</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="blogPost in listOfBlogsWaitingForApproval">   <!-- here blogPost is localvariable having all properties like id,blogtitle,postedby,postedon...etc -->
+<td><a href="#/getApprovalForm/{{blogPost.blogId}}">{{blogPost.blogTitle}}</a></td>		<!--it generate url like #/getBlogById/111   (111 is id)  -->
+<td>{{blogPost.postedBy.userId}}</td>
+<td>{{blogPost.postedOn | date : 'dd/MM/yyyy hh:mm'}}</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!--=================================================================================  -->
+<div>
+<b>List of approved blogs</b>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Blogs Title</th>
+<th>Author</th>
+<th>posted on</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="blogPost in listOfBlogsApproved">
+<td><a href="#/getBlogById/{{blogPost.blogId}}">{{blogPost.blogTitle}}</a></td>
+<td>{{blogPost.postedBy.userId}}</td>
+<td>{{blogPost.postedOn | date : 'dd/MM/yyyy hh:mm'}}</td>
+</tr>
+</tbody>
+</table>
+</div>

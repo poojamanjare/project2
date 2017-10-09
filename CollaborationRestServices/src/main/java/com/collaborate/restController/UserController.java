@@ -30,6 +30,12 @@ public class UserController
 	@Autowired
 	UserService userService;
 	
+	public UserController() 
+	{
+		System.out.println("UserController Instantialted...!!!");
+		
+	}
+	
 	//============method for creating user===============================
 	@PostMapping(value="/createUsers")
 	public ResponseEntity<?>createUsers(@RequestBody Users users)
@@ -62,6 +68,7 @@ public class UserController
 	public ResponseEntity<?>Login(@RequestBody Users users,HttpSession session)
 	{
 		Users validuser=usersDAO.login(users);
+		System.out.println("***********validuser***"+validuser);
 		if(validuser==null)		//invalid Username/password
 		{
 			Error error=new Error(4, "invalid Username/Password...");
@@ -96,17 +103,12 @@ public class UserController
 			Error error=new Error(5, "Unauthorized access...please login first");
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 		}
-		Users users=userService.getUsers(userId);
-		try{
+		Users users=userService.getUserByUserId(userId);
 		users.setIsOnline("No");
 		userService.update(users);
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
 		session.removeAttribute("userId");
 		session.invalidate();
-		return new ResponseEntity<String>("Logout", HttpStatus.OK);
+		return new ResponseEntity<Users>(users, HttpStatus.OK);
 		
 	}
 	//===========================get user===========================================
@@ -127,13 +129,15 @@ public class UserController
 	public ResponseEntity<?>updateUser(@RequestBody Users users,HttpSession session)
 	{
 		String userId=(String) session.getAttribute("userId");
+		System.out.println("*************userid in update()::"+userId);
 		if(userId==null)
 		{
 			Error error=new Error(7, "Unauthorized access...please login first");
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 		}
-		if(!userService.isEmailValid(users.getEmail()))
+		if(!userService.isUpdatedEmailValid(users.getEmail(),users.getUserId()))
 		{
+			System.out.println("errrrrrrrrrrrrrrrrr");
 			Error error=new Error(3, "Email already exists...Please enter different email-Id");
 			return new ResponseEntity<Error>(error,HttpStatus.NOT_ACCEPTABLE);
 			
@@ -141,12 +145,14 @@ public class UserController
 		
 		try
 		{
+			System.out.println("in usercontroller............update");
 			userService.update(users);
 			return new ResponseEntity<Users>(users,HttpStatus.OK);
 			
 		}
 		catch(Exception e)
 		{
+			System.out.println("catch exception...........");
 			Error error=new Error(1, "Unable to register user details");
 			return new ResponseEntity<Error>(error,HttpStatus.INTERNAL_SERVER_ERROR);//500
 		}
@@ -158,7 +164,7 @@ public class UserController
 	
 	
 	
-	//=============method for getting user by userid=====================
+	/*//=============method for getting user by userid=====================
 	@GetMapping(value="/getUserById/{userid}")
 	public ResponseEntity<Users>getUserById(@PathVariable("userid")String userId)
 	{
@@ -227,7 +233,7 @@ public class UserController
 		{
 			return new ResponseEntity<String>("Problem in deleting user", HttpStatus.NOT_ACCEPTABLE);
 		}
-	}
+	}*/
 	
 
 }

@@ -4,8 +4,9 @@
 <style type="text/css">
 body
 {
-background-image: url("images/wall3.jpg");
-background-size: cover;  
+background-image: url("images/f5.jpg");
+ background-size: cover;   
+
 }
 </style>
 <meta charset="utf-8">
@@ -14,9 +15,16 @@ background-size: cover;
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.js"></script>
 <script src="js/myModule.js"></script>
 <script src="controller/usercontroller.js"></script>
+<script src="controller/blogpostcontroller.js"></script>
 <script src="services/userservice.js"></script>
+<script src="services/blogpostservice.js"></script>
+<script src="controller/blogpostdetailcontroller.js"></script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body ng-app="myModule" ng-controller="UserController">
@@ -37,7 +45,16 @@ background-size: cover;
     					<li><a href="#/Home">Home</a></li>
 						<li><a href="#/AboutUs">About Us</a></li>
 						<li><a href="#/ContactUs">Contact Us</a></li>
+						<!-- <li><a href="#/addBlogPost" ng-show="currentUser.userId">Add BlogPost</a></li> -->
 						<li><a href="#/editProfile" ng-show="currentUser.userId">Edit Profile</a></li>
+						<!-- ==================dropdown========================== -->
+						<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" ng-show="currentUser.userId">Blog<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#/addBlogPost">Add BlogPost</a></li>
+								<li><a href="#/getBlogs">Get All Blogs</a></li>
+							</ul>
+						</li>
+						<!--===============================================================================  -->						
 				</ul>
 			
 				<div>
@@ -45,7 +62,7 @@ background-size: cover;
      					<li><a href="#/Login" ng-hide="currentUser.userId">Sign In</a></li>
      					<li><a href="#" ng-click="Logout()" ng-show="currentUser.userId">Logout</a></li>
 						<li><a href="#/Register" ng-hide="currentUser.userId">Sign Up</a></li>
-						<li><a href="#" ng-show="currentUser.userId">Welcome {{currentUser.userId}}</a></li>
+						<li><a href="#" ng-show="currentUser.userId">Welcome:{{currentUser.firstName}} {{currentUser.lastName}}</a></li>
      				</ul>
 				</div>
 			</div>

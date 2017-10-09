@@ -54,9 +54,11 @@ myApp.controller('UserController',function($scope,UserService,$location,$rootSco
 			}
 			$scope.updateUser=function()
 			{
+				console.log("Update::"+$scope.users)
 				UserService.updateUser($scope.users)
 				.then
 				(
+						
 						function(response)
 						{
 							alert("user Details get updated successfully...!!!");
@@ -64,7 +66,7 @@ myApp.controller('UserController',function($scope,UserService,$location,$rootSco
 						}
 						,function(response)
 						{
-							alert("failure response");
+							/*alert("failure response");*/
 							if(response.status==401)
 							{
 								$location.path('/Login')
@@ -72,7 +74,7 @@ myApp.controller('UserController',function($scope,UserService,$location,$rootSco
 							else
 							{
 								$scope.error=response.data
-								$location.path('/Editprofile')
+								$location.path('/editProfile')
 							}	
 						}
 				)
@@ -84,7 +86,7 @@ myApp.controller('UserController',function($scope,UserService,$location,$rootSco
 				(
 						function(response)
 						{
-							alert("success response"+users.getUser)
+							/*alert("success response"+users.getUser)*/
 							$scope.users=response.data
 						}
 						,function(response)
