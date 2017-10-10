@@ -2,6 +2,8 @@ package com.collaborate.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import com.collaborate.configuration.DBConfig;
+
 
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer 
 {
@@ -9,13 +11,13 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
-		return new Class[]{WebResolver.class};
+		return new Class[]{DBConfig.class};
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Class[]{WebResolver.class};
 	}
 
 	@Override

@@ -14,6 +14,7 @@ myApp.controller('BlogPostDetailController',function($scope,$location,BlogPostSe
 			.then(
 					function(response)
 					{
+						console.log(response.data)
 						$scope.blogPost=response.data	//BlogPost[select * from blogPost where blogId=?]
 					},function(response)
 					{
@@ -30,6 +31,7 @@ myApp.controller('BlogPostDetailController',function($scope,$location,BlogPostSe
 				
 			$scope.updateBlogPost=function()
 			{
+		/*console.log("Approved/Reject::"+$scope.blogPost.approved)*/
 			BlogPostService.updateBlogPost($scope.blogPost)
 					.then
 					(
@@ -43,6 +45,35 @@ myApp.controller('BlogPostDetailController',function($scope,$location,BlogPostSe
 								$location.path('/Login')
 						})
 			}
+	
+		//============================update likes===================================================================
+		$scope.updateLikes=function()
+		{
+			$scope.isLiked=!$scope.isLiked;	//it is true(initially it is false...we convert it into true)
+			if($scope.isLiked)
+				{
+					$scope.blogPost.likes=$scope.blogPost.likes + 1//1st click
+				}
+			else
+				{
+				$scope.blogPost.likes=$scope.blogPost.likes - 1//2nd click
+				}
+			
+			//update blogpost set likes=? where blogid=?
+			/*BlogPostService.updateLikes($scope.blogPost)
+			.then
+			(
+				function(response)
+				{
+					alert("likes")
+					console.log(response.data)
+				},function(response)
+				{
+					console.log(response.status)
+					if(response.status==401)
+						$location.path('/Login')
+				})*/
+		}
 	
 		$scope.showRejectionText=function(val)
 		{

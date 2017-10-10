@@ -12,14 +12,14 @@ myApp.controller('UserController',function($scope,UserService,$location,$rootSco
 						
 						function(response)
 						{
-							alert("success response is::"+response);
+							/*alert("success response is::"+response);*/
 							console.log(response.data)
 							console.log(response.status)
 							$location.path('/Home')
 						}
 						,function(response)
 						{
-							alert("failure response::"+response);
+							/*alert("failure response::"+response);*/
 							console.log(response.data)
 							console.log(response.status)
 							$scope.error=response.data
@@ -35,7 +35,7 @@ myApp.controller('UserController',function($scope,UserService,$location,$rootSco
 				(
 						function(response)
 						{
-							alert("success response::"+response);
+							/*alert("success response::"+response);*/
 							$rootScope.currentUser=response.data
 							$cookieStore.put('userDetails',response.data)
 							console.log(response.data)
@@ -44,7 +44,7 @@ myApp.controller('UserController',function($scope,UserService,$location,$rootSco
 						}
 						,function(response)
 						{
-							alert("failure response::"+response);
+							/*alert("failure response::"+response);*/
 							console.log(response.data)
 							console.log(response.status)
 							$scope.error=response.data.message

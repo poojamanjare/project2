@@ -5,11 +5,11 @@
 <tr>
 <th>Blogs Title</th>
 <th>Author</th>
-<th>posted on</th>
+<th>Posted on</th>
 </tr>
 </thead>
 <tbody>
-<tr ng-repeat="blogPost in listOfBlogsWaitingForApproval">   <!-- here blogPost is localvariable having all properties like id,blogtitle,postedby,postedon...etc -->
+<tr ng-repeat="blogPost in listOfBlogsWaitingForApproval">   <!-- here blogPost is local variable having all properties like id,blogtitle,postedby,postedon...etc -->
 <td><a href="#/getApprovalForm/{{blogPost.blogId}}">{{blogPost.blogTitle}}</a></td>		<!--it generate url like #/getBlogById/111   (111 is id)  -->
 <td>{{blogPost.postedBy.userId}}</td>
 <td>{{blogPost.postedOn | date : 'dd/MM/yyyy hh:mm'}}</td>
@@ -25,7 +25,7 @@
 <tr>
 <th>Blogs Title</th>
 <th>Author</th>
-<th>posted on</th>
+<th>Posted on</th>
 </tr>
 </thead>
 <tbody>

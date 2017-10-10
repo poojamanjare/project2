@@ -3,13 +3,18 @@
 <div class="panel panel-default">
 <div class="panel heading">
 <div>{{blogPost.blogTitle}}</div>
-<span><strong>Created By::{{blogPost.postedBy.userId}}</strong></span>
+<div>
+<span><strong>Created By::</strong>{{blogPost.postedBy.userId}}</span>
+<br>
 <span><strong>On::</strong>{{blogPost.postedOn | date:'medium'}}</span>
 </div>
-
+</div>
 <div class="panel-body">{{blogPost.blogContent}}</div>
 
 </div>
 </div>
 </div>
-<b style="color: white;">textArea for posting comments</b>
+{{blogPost.likes}}Likes
+<a><span class="glyphicon glyphicon-thumbs-up" ng-class="isLiked?'liked':'default'" ng-click="updateLikes()"></span></a>
+<br>
+<b>textArea for posting comments</b>

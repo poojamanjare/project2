@@ -64,6 +64,7 @@ public class BlogPostController
 	@GetMapping(value="/getBlogs/{approved}")
 	public ResponseEntity<?>getBlogs(@PathVariable int approved,HttpSession session)
 	{
+		System.out.println("getblogs..........");
 		String userId=(String) session.getAttribute("userId");
 		if(userId==null)
 		{
@@ -84,6 +85,7 @@ public class BlogPostController
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);//unauthorized
 		}
 		BlogPost blogPost=blogPostService.getBlogById(blogId);
+		System.out.println("getBlogByid::"+blogPost.getBlogId());
 		return new ResponseEntity<BlogPost>(blogPost,HttpStatus.OK);
 		
 	}

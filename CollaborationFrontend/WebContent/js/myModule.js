@@ -1,4 +1,4 @@
-var myApp=angular.module("myModule",["ngRoute","ngCookies"])
+	var myApp=angular.module("myModule",["ngRoute","ngCookies"])
 myApp.config(function($routeProvider)
 	{
 		$routeProvider
@@ -43,14 +43,14 @@ myApp.config(function($routeProvider)
 			
 			
 			
-			.when("/getBlogById/:blogId",{		//blogs approved
-				templateUrl:"views/blogDetails.html",		//details of approved blogs //blogPost + approval form
+			.when("/getBlogById/:blogId",{					//blogs approved
+				templateUrl:"views/blogDetails.html",		//details of approved blogs //blogPost + textarea
 				controller:"BlogPostDetailController"		//$scope.blogPost=select * from blogPost where id=?		
 			})
 			
-			.when("/getApprovalForm/:blogId",{ //blogs waiting for approval
-				templateUrl:"views/blogApprovalForm.html",//blogPost + textarea
-				controller:"BlogPostDetailController"	//$scope.blogPost=select * from blogPost where id=?			
+			.when("/getApprovalForm/:blogId",{ 				//blogs waiting for approval
+				templateUrl:"views/blogApprovalForm.html",	//blogPost + approval form
+				controller:"BlogPostDetailController"		//$scope.blogPost=select * from blogPost where id=?			
 			})
 			
 						
