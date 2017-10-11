@@ -17,4 +17,15 @@
 {{blogPost.likes}}Likes
 <a><span class="glyphicon glyphicon-thumbs-up" ng-class="isLiked?'liked':'default'" ng-click="updateLikes()"></span></a>
 <br>
-<b>textArea for posting comments</b>
+<b>comments</b>
+<ul>
+<li ng-repeat="blogComment in blogComments">
+{{blogComment.commentText}}
+<strong>by</strong> {{blogComment.commentedBy.userId}}
+<strong>on</strong>{{blogComment.commentedOn | date : 'medium'}}
+</li>
+</ul>
+<div>
+<textarea rows="2" cols="30" ng-model="blogComment.commentText"></textarea>
+<button class="btn btn-primary" value="POST COMMENT" ng-click="addComment()">POST COMMENT</button>
+</div>

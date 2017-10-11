@@ -2,7 +2,7 @@
 .container {
   position: relative;
   z-index: 1;
-  background:appworkspace;
+  
   max-width: 500px;
   margin: auto;
   padding: 45px;

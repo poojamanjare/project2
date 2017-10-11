@@ -79,4 +79,47 @@ myApp.controller('BlogPostDetailController',function($scope,$location,BlogPostSe
 		{
 			$scope.isRejected=val	//true/false
 		}
-		})
+		
+		
+		//==================insert into blogcomment==================================
+		$scope.addComment=function()
+		{
+			console.log($scope.blogComment)//commentText property in blogcomment
+			
+			//value for FK blogId in blogComment
+			$scope.blogComment.blogPost=$scope.blogPost	//blogpost property in blogcomment
+			console.log($scope.blogComment)
+			BlogPostService.addComment($scope.blogComment)
+			.then
+			(
+					function(response)
+					{
+						//getBlogComments()
+					},function(response)
+					{
+						console.log(response.status)
+						if(response.status==401)
+							$location.path('/Login')
+						else
+							$location.path("/getBlogById/"+blogId)	//  else user go to same page i.e. blogDetails.html
+					})
+		}
+		
+		function getBlogComments()	//select blogcomments for particular blogpost
+		{
+			BlogPostService.getBlogComments(blogId)
+			.then
+			(
+				function(response)
+				{
+					$scope.blogComments=response.data	//list of blogcomments for blogId
+				},function(response)
+				{
+					console.log(response.status)
+					if(response.status==401)
+						$location.path('/Login')
+				})
+		}
+		getBlogComments()
+		
+})

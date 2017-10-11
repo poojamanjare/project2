@@ -32,10 +32,15 @@ myApp.factory('BlogPostService',function($http)
 					console.log(blogPost)
 					return $http.put(BASE_URL+"/update",blogPost)
 				}
-				/*blogPostService.updateLikes=function(blogPost)
+				blogPostService.addComment=function(blogComment)
 				{
-					console.log(blogPost)
-				}*/
+					console.log(blogComment)
+					return $http.post(BASE_URL+"/addComment",blogComment)
+				}
+				blogPostService.getBlogComments=function(blogId)
+				{
+					return $http.get(BASE_URL+"/getComments/"+blogId)
+				}
 				
 				
 			

@@ -60,7 +60,7 @@ public class BlogPostController
 		}
 		
 	}
-	//==========================get list of approved blogs=============================================================
+	//==========================get list of approved blogs and waiting for approval=============================================================
 	@GetMapping(value="/getBlogs/{approved}")
 	public ResponseEntity<?>getBlogs(@PathVariable int approved,HttpSession session)
 	{
@@ -110,6 +110,7 @@ public class BlogPostController
 		
 		
 	}
+	
 	
  
 }
