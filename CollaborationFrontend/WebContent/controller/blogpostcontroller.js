@@ -10,7 +10,7 @@ myApp.controller('BlogPostController',function($scope,$location,BlogPostService)
 					function(response)
 					{
 						alert("BlogPost added Successfully & Waiting for approval...!!!")
-						$location.path('/Home')
+						$location.path('/getBlogs')
 					},function(response)	//response status[401/500]
 					{
 						$scope.error=response.data 	//Error(code,message)

@@ -60,19 +60,19 @@ myApp.controller('BlogPostDetailController',function($scope,$location,BlogPostSe
 				}
 			
 			//update blogpost set likes=? where blogid=?
-			/*BlogPostService.updateLikes($scope.blogPost)
+			BlogPostService.updateBlogPost($scope.blogPost)
 			.then
 			(
 				function(response)
 				{
-					alert("likes")
+					/*alert("likes")*/
 					console.log(response.data)
 				},function(response)
 				{
 					console.log(response.status)
 					if(response.status==401)
 						$location.path('/Login')
-				})*/
+				})
 		}
 	
 		$scope.showRejectionText=function(val)
@@ -94,7 +94,9 @@ myApp.controller('BlogPostDetailController',function($scope,$location,BlogPostSe
 			(
 					function(response)
 					{
-						//getBlogComments()
+						console.log(response.data)
+						$scope.blogComment.commentText=''	//after loading new comment then textasrea will get empty again
+						getBlogComments()
 					},function(response)
 					{
 						console.log(response.status)

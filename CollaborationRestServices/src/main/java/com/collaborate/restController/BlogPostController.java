@@ -100,7 +100,7 @@ public class BlogPostController
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);//unauthorized
 		}
 		//admin has reject the blogpost but reason is not mentioned
-		if(!blogPost.isApproved() && blogPost.getRejectionReason()==null)
+		if(!blogPost.isApproved() && blogPost.getRejectionReason()==null)	//approved=0 and rejectionReason=null
 		{
 			blogPost.setRejectionReason("Not Mentioned");
 		}

@@ -31,12 +31,12 @@ myApp.config(function($routeProvider)
 				controller:"UserController"				
 			})
 			
-			.when("/addBlogPost",{
+			.when("/addBlogPost",{							//view to controller
 				templateUrl:"views/BlogPostForm.html",
 				controller:"BlogPostController"				
 			})
 			
-			.when("/getBlogs",{
+			.when("/getBlogs",{						//cintroller to view
 				templateUrl:"views/blogslist.html",
 				controller:"BlogPostController"				
 			})
@@ -51,6 +51,11 @@ myApp.config(function($routeProvider)
 			.when("/getApprovalForm/:blogId",{ 				//blogs waiting for approval
 				templateUrl:"views/blogApprovalForm.html",	//blogPost + approval form
 				controller:"BlogPostDetailController"		//$scope.blogPost=select * from blogPost where id=?			
+			})
+			
+			.when("/addJob",{
+				templateUrl:"views/jobForm.html",
+				controller:"JobController"				
 			})
 			
 						
@@ -68,9 +73,11 @@ myApp.config(function($routeProvider)
 				
 			$rootScope.Logout=function()
 			{
+				console.log('entering logout function')
 				UserService.Logout().then(
 									function(response)
 									{
+											console.log('Logged out successfully')
 											delete $rootScope.currentUser;
 											$cookieStore.remove('userDetails')
 											$location.path('/Login')
@@ -80,6 +87,7 @@ myApp.config(function($routeProvider)
 											console.log(response.status)
 											if(response.status==401)
 												{
+														console.log('error in logout')
 														delete $rootScope.currentUser;
 														$cookieStore.remove('userDetails')
 														$location.path('/Login')
