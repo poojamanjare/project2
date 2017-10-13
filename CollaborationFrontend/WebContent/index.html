@@ -19,9 +19,11 @@ background-image: url("images/wall2.jpg");
 <script src="controller/usercontroller.js"></script>
 <script src="controller/blogpostcontroller.js"></script>
 <script src="controller/blogpostdetailcontroller.js"></script>
+<script src="controller/jobcontroller.js"></script>
 
 <script src="services/userservice.js"></script>
 <script src="services/blogpostservice.js"></script>
+<script src="services/jobservice.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -49,13 +51,20 @@ background-image: url("images/wall2.jpg");
     					<li><a href="#/Home">Home</a></li>
 						<li><a href="#/AboutUs">About Us</a></li>
 						<li><a href="#/ContactUs">Contact Us</a></li>
-						<li><a href="#/addJob">Add Jobs</a></li>
+						
 						<li><a href="#/editProfile" ng-show="currentUser.userId">Edit Profile</a></li>
-						<!-- ==================dropdown========================== -->
+						<!-- ==================dropdown for blogpost========================== -->
 						<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" ng-show="currentUser.userId">Blog<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="#/addBlogPost">Add BlogPost</a></li>
 								<li><a href="#/getBlogs">Get All Blogs</a></li>
+							</ul>
+						</li>
+						<!-- ==================dropdown for job========================== -->
+						<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" ng-show="currentUser.userId">Job<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#/addJob" ng-show="currentUser.role=='ADMIN'">Add Jobs</a></li>
+								<li><a href="#/getAllJobs">Get All Jobs</a></li>
 							</ul>
 						</li>
 						<!--===============================================================================  -->						

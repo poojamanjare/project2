@@ -1,11 +1,15 @@
 package com.collaborate.restController;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,6 +50,7 @@ public class JobController
 		
 		try
 		{
+			job.setPostedOn(new Date());
 			jobService.addJob(job);
 			return new ResponseEntity<Job>(job,HttpStatus.OK);
 			
@@ -55,6 +60,19 @@ public class JobController
 			Error error=new Error(7, "Unable to insert job Details...");
 			return new ResponseEntity<Error>(error,HttpStatus.NOT_ACCEPTABLE);//exception
 		}
+	}
+	//====================get all jobs====================================
+	@GetMapping(value="/getAllJobs")
+	public ResponseEntity<?>getAllJobs(HttpSession session)
+	{
+		String userId=(String) session.getAttribute("userId");
+		if(userId==null)
+		{
+			Error error=new Error(5, "unauthorized access...");
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);//unauthorized
+		}
+		List<Job>jobs=jobService.getAllJobs();
+		return new ResponseEntity<List<Job>>(jobs,HttpStatus.OK);
 	}
 
 }

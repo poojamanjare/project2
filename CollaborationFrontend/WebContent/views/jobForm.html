@@ -1,1 +1,36 @@
-Job form
+<div class="container">
+<span style="color:red;">{{error.message}}</span>
+<form>
+<div class="form-group">
+Enter JobTitle::
+<input type="text" ng-model="job.jobTitle" class="form-control">
+</div>
+
+<div class="form-group">
+Enter Job Description::
+<textarea rows="3" cols="20" ng-model="job.jobDescription"></textarea>
+</div>
+
+<div class="form-group">
+Enter Skills::
+<input type="text" ng-model="job.skillRequired" class="form-control">
+</div>
+
+<div class="form-group">
+Enter Salary::
+<input type="text" ng-model="job.salary" class="form-control">
+</div>
+
+<div class="form-group">
+Enter Location::
+<input type="text" ng-model="job.location" class="form-control">
+</div>
+
+<div class="form-group">
+Enter Company Name::
+<input type="text" ng-model="job.companyName" class="form-control">
+</div>
+
+<input type="submit" value="Post Job" ng-click="addJob()">
+</form>
+</div>

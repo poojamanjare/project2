@@ -58,6 +58,11 @@ myApp.config(function($routeProvider)
 				controller:"JobController"				
 			})
 			
+			.when("/getAllJobs",{
+				templateUrl:"views/joblist.html",
+				controller:"JobController"				
+			})
+			
 						
 			.otherwise({
 				templateUrl:"views/Home.html"
