@@ -4,6 +4,7 @@
 
 myApp.controller('JobController',function($scope,$location,JobService)
 		{
+			$scope.showJobDetails=false;
 			$scope.addJob=function()	//this function execute automatically when admin clock on post job button
 			{
 				JobService.addJob($scope.job)//here call the service
@@ -50,4 +51,27 @@ myApp.controller('JobController',function($scope,$location,JobService)
 					})
 			}
 			getAllJobs()//this statement gets executed automatically whenever the controller get instantiated
+			
+			//===================to get job details by jobid=======================================
+			$scope.getJobDetails=function(jobId)	//jobId is the function parameter u can give any variable name
+			{
+				$scope.showJobDetails=true;
+				JobService.getJobDetails(jobId)
+				.then
+				(
+					function(response)
+					{
+						$scope.job=response.data //jobobject result of select * from job where jobId=?
+					},function(response)
+					{
+
+						console.log(response.data)
+						if(response.status==401)
+							{
+								//$scope.error=response.data.message	//error data get display
+								$location.path('/Login')
+							}
+					})
+				
+			}
 		})
