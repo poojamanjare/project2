@@ -1,3 +1,4 @@
+<input type="text" ng-model="searchText">
 <table class="table table-striped">
 <thead>
 <tr>
@@ -7,7 +8,7 @@
 </tr>
 </thead>
 <tbody>
-<tr ng-repeat="job in jobs">
+<tr ng-repeat="job in jobs | filter:searchText">
 <td><a href="" ng-click="getJobDetails(job.jobId)">{{job.jobTitle}}</a></td>
 <td>{{job.postedOn | date : 'dd/MM/yyyy hh:mm'}}</td>
 <td>{{job.skillRequired}}</td>

@@ -53,14 +53,33 @@ myApp.config(function($routeProvider)
 				controller:"BlogPostDetailController"		//$scope.blogPost=select * from blogPost where id=?			
 			})
 			
-			.when("/addJob",{
+			.when("/addJob",{					//v to c 		$scope.addJob()->insert query-->from frontend to backend
 				templateUrl:"views/jobForm.html",
 				controller:"JobController"				
 			})
 			
-			.when("/getAllJobs",{
+			.when("/getAllJobs",{			//c to v		function getAllJobs($scope.jobs=[])->select query
 				templateUrl:"views/joblist.html",
 				controller:"JobController"				
+			})
+			
+			.when("/uploadProfilePicture",{
+				templateUrl:"views/profilePicture.html"
+			})
+			
+			.when("/getSuggestedUsers",{				//c to v-->select query-->from backend to frontend
+				templateUrl:"views/suggestedUsers.html",
+				controller:"FriendController"				
+			})
+			
+			.when("/pendingRequests",{				//c to v-->select query
+				templateUrl:"views/pendingRequests.html",
+				controller:"FriendController"				
+			})
+			
+			.when("/listOfFriends",{				//c to v-->select query
+				templateUrl:"views/listOfFriends.html",
+				controller:"FriendController"				
 			})
 			
 						

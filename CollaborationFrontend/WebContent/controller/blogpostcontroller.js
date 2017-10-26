@@ -17,7 +17,7 @@ myApp.controller('BlogPostController',function($scope,$location,BlogPostService)
 						if(response.status==401)	//401
 							$location.path('Login')
 						else						//500
-							$location.path('addBlogPost')
+							$location.path('/addBlogPost')
 					}
 					)
 			}

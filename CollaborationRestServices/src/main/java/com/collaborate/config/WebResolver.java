@@ -25,7 +25,8 @@ public class WebResolver
 	public  CommonsMultipartResolver getCommonsMultipartResolver()
 	{
 		CommonsMultipartResolver commonsMultipartResolver=new CommonsMultipartResolver();
-		commonsMultipartResolver.setMaxUploadSize(1234000);
+		commonsMultipartResolver.setMaxUploadSize(20971520);//20MB
+		commonsMultipartResolver.setMaxInMemorySize(1048576);//1MB
 		return commonsMultipartResolver;
 	}
 }

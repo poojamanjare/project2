@@ -1,6 +1,6 @@
 /**
  * BlogPostDetailController
- * getBlogByid/1
+ * getBlogByid/1zzzzzzz
  * getBlogByid/:id
  * $routeParams.id=>1
  */

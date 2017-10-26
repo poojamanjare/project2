@@ -1,3 +1,4 @@
+<input type="text" ng-model="searchText">
 <div ng-show="currentUser.role=='ADMIN'">         <!-- if login user role is admin then show this table -->
 <B>Lists of Blogs Waiting for approval</B>
 <table class="table table-striped">
@@ -29,7 +30,7 @@
 </tr>
 </thead>
 <tbody>
-<tr ng-repeat="blogPost in listOfBlogsApproved">
+<tr ng-repeat="blogPost in listOfBlogsApproved | filter:searchText">
 <td><a href="#/getBlogById/{{blogPost.blogId}}">{{blogPost.blogTitle}}</a></td>
 <td>{{blogPost.postedBy.userId}}</td>
 <td>{{blogPost.postedOn | date : 'dd/MM/yyyy hh:mm'}}</td>
