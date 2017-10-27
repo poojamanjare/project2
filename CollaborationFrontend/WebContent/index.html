@@ -78,7 +78,7 @@ background-image: url("images/b.jpg");
 						</li>
 						<!--===============================================================================  -->	
 						<li><a href="#/uploadProfilePicture" ng-show="currentUser.userId"><img src="http://localhost:8085/CollaborationRestServices/getProfilePicture/{{currentUser.userId}}" alt="Upload Profile Picture" height="40px" width="40px" class="img-rounded"></a></li>
-						
+						<li><a href="#/chat" ng-show="currentUser.userId">Chat</a></li>
 						<!-- ==================dropdown for friend========================== -->
 						<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" ng-show="currentUser.userId">Friend<b class="caret"></b></a>
 							<ul class="dropdown-menu">

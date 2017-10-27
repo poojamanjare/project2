@@ -82,6 +82,11 @@ myApp.config(function($routeProvider)
 				controller:"FriendController"				
 			})
 			
+			.when("/chat",{
+				templateUrl:"views/chat.html",
+				controller:"ChatController"				
+			})
+			
 						
 			.otherwise({
 				templateUrl:"views/Home.html"
@@ -92,12 +97,14 @@ myApp.config(function($routeProvider)
 	myApp.run(function($rootScope,$cookieStore,UserService,$location)
 	
 		{
+			alert('Entering into myApp.run function')
 			if($rootScope.currentUser==undefined)
 				$rootScope.currentUser=$cookieStore.get('userDetails')
 				
 			$rootScope.Logout=function()
 			{
 				console.log('entering logout function')
+				.
 				UserService.Logout().then(
 									function(response)
 									{
