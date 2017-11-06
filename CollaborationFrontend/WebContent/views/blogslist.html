@@ -1,4 +1,6 @@
-<input type="text" ng-model="searchText">
+<div style="text-align: center; padding: 10px;">
+<input type="text" ng-model="searchText" placeholder="Search Blogs...">
+</div>
 <div ng-show="currentUser.role=='ADMIN'">         <!-- if login user role is admin then show this table -->
 <B>Lists of Blogs Waiting for approval</B>
 <table class="table table-striped">
@@ -19,8 +21,9 @@
 </table>
 </div>
 <!--=================================================================================  -->
-<div>
-<b>List of approved blogs</b>
+<div class="container">
+<div class="col-lg-12">
+<b style="color:#D2691E;">List of approved blogs</b>
 <table class="table table-striped">
 <thead>
 <tr>
@@ -37,4 +40,5 @@
 </tr>
 </tbody>
 </table>
+</div>
 </div>

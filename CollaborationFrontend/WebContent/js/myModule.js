@@ -1,4 +1,4 @@
-	var myApp=angular.module("myModule",["ngRoute","ngCookies"])
+var myApp=angular.module("myModule",["ngRoute","ngCookies"])
 myApp.config(function($routeProvider)
 	{
 		$routeProvider
@@ -89,22 +89,22 @@ myApp.config(function($routeProvider)
 			
 						
 			.otherwise({
-				templateUrl:"views/Home.html"
+				templateUrl:"views/Home.html",
+				controller:"HomeController"
 			})
 				
 	})
 	
-	myApp.run(function($rootScope,$cookieStore,UserService,$location)
+	myApp.run(function($rootScope,$cookieStore,UserService,$location,BlogPostService)
 	
 		{
-			alert('Entering into myApp.run function')
+			console.log('Entering into myApp.run function')
 			if($rootScope.currentUser==undefined)
 				$rootScope.currentUser=$cookieStore.get('userDetails')
 				
 			$rootScope.Logout=function()
 			{
 				console.log('entering logout function')
-				.
 				UserService.Logout().then(
 									function(response)
 									{
@@ -125,4 +125,45 @@ myApp.config(function($routeProvider)
 												}
 									})
 			}
+			
+			//===========================================================================
+			function getNotification()
+			{
+			BlogPostService.getNotification()
+			.then
+			(
+				function(response)
+				{
+					$rootScope.blogApprovalStatus=response.data		//List of BlogPost
+					$rootScope.approvalStatusLength=$rootScope.blogApprovalStatus.length	//number of objects
+					
+				},function(response)
+				{
+					if(response.status==401)
+						$location.path('/login')
+				})
+			}
+			//===========================================================================
+			$rootScope.updateViewedStatus=function(blogPost)
+			{
+				blogPost.viewed=1
+				BlogPostService.updateBlogPost(blogPost)
+				.then
+				(
+					function(response)
+					{
+						getNotification();
+					},function(response)
+					{
+						if(response.status==401)
+							$location.path('/login')
+					})
+			}
+			//===========================================================================
+			$rootScope.updateLength=function()
+			{
+				$rootScope.approvalStatusLength=0
+			}
+		
+			getNotification()
 		})

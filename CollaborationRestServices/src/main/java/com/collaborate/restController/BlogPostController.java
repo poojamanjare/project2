@@ -107,8 +107,21 @@ public class BlogPostController
 		
 		blogPostService.updateBlogPost(blogPost);
 		return new ResponseEntity<BlogPost>(blogPost,HttpStatus.OK);
+	}
+	
+	//=====================Get Notification==========================================================
+	@GetMapping(value="/getNotification")
+	public ResponseEntity<?>getNotification(HttpSession session)
+	{
+		String userId=(String) session.getAttribute("userId");
+		if(userId==null)
+		{
+			Error error=new Error(5, "unauthorized access...");
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);//unauthorized
+		}
 		
-		
+		List<BlogPost>blogPostNotification=blogPostService.getNotification(userId);
+		return new ResponseEntity<List<BlogPost>>(blogPostNotification,HttpStatus.OK);
 	}
 	
 	

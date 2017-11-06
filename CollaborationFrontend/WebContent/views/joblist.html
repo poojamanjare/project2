@@ -1,4 +1,8 @@
-<input type="text" ng-model="searchText">
+<div style="text-align: center; padding: 10px;">
+<input type="text" ng-model="searchText" placeholder="Search Jobs...">
+</div>
+<div class="container11">
+
 <table class="table table-striped">
 <thead>
 <tr>
@@ -16,7 +20,7 @@
 </tbody>
 </table>
 <div ng-show="showJobDetails">
-JobDetails
+<h3>JobDetails</h3>
 <pre>
 JobTitle:{{job.jobTitle}}
 Job Description:{{job.jobDescription}}
@@ -26,4 +30,5 @@ Location:{{job.location}}
 Company Name:{{job.companyName}}
 Posted On:{{job.postedOn | date:'medium'}}
 </pre>
+</div>
 </div>

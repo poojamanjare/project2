@@ -16,7 +16,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.collaborate.Services.ProfilePictureService;
 import com.collaborate.model.Error;
 import com.collaborate.model.ProfilePicture;
-import com.collaborate.model.Users;
+//import com.collaborate.model.Users;
 //import com.collaborate.model.Users;
 
 @RestController

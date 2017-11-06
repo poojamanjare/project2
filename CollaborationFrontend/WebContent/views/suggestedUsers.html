@@ -1,6 +1,11 @@
+<div style="text-align: center; padding: 10px;">
 <span ng-if="suggestedUsers.length==0"><b>NO Suggested users</b></span>
-<table class="table table-striped">
+</div>
+<div class="container11">
+<div class="col=lg-12">
+<table class="table table-hover table-condenced">
 <tbody>
+<h3 style="text-align: center; color: #D2691E;"><b>Suggested Users...</b></h3>
 <tr ng-repeat="user in suggestedUsers">
 
 <td>{{user.userId}}</td>
@@ -15,3 +20,5 @@
 </tr>
 </tbody>
 </table>
+</div>
+</div>

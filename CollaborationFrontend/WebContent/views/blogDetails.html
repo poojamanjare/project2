@@ -1,23 +1,25 @@
+<div class="container">
 <div class="row">
 <div>
 <div class="panel panel-default">
 <div class="panel heading">
-<div>{{blogPost.blogTitle}}</div>
+<div><h3>BlogTiTle: {{blogPost.blogTitle}}</h3></div>
 <div>
-<span><strong>Created By::</strong>{{blogPost.postedBy.userId}}</span>
+<span><strong>Created By: </strong>{{blogPost.postedBy.userId}}</span>
 <br>
-<span><strong>On::</strong>{{blogPost.postedOn | date:'medium'}}</span>
+<span><strong>On: </strong>{{blogPost.postedOn | date:'medium'}}</span>
 </div>
-</div>
-<div class="panel-body">{{blogPost.blogContent}}</div>
 
+<div class="panel-body"><strong>Blog content:</strong> {{blogPost.blogContent}}</div>
+</div>
 </div>
 </div>
 </div>
 {{blogPost.likes}}Likes
 <a><span class="glyphicon glyphicon-thumbs-up" ng-class="isLiked?'liked':'default'" ng-click="updateLikes()"></span></a>
 <br>
-<b>comments</b>
+<b>comments <i class="fa fa-comments" aria-hidden="true"></i>
+</b>
 <ul>
 <li ng-repeat="blogComment in blogComments">
 {{blogComment.commentText}}
@@ -28,4 +30,5 @@
 <div>
 <textarea rows="2" cols="30" ng-model="blogComment.commentText"></textarea>
 <button class="btn btn-primary" value="POST COMMENT" ng-click="addComment()">POST COMMENT</button>
+</div>
 </div>

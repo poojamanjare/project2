@@ -1,6 +1,24 @@
 /**
  * ChatService
  */
+myApp.filter('reverse',function()
+		{
+			return function(items)
+			{
+				return items.slice().reverse();
+			};
+		});	
+		
+myApp.directive('ngFocus',function()
+		{
+			return function(scope,element,attrs)
+			{
+				element.bind('click', function()
+				{
+					$('.' + attrs.ngFocus)[0].focus();
+				});
+			};
+		});
 myApp.factory('socket',function($rootScope)
 		{
 			alert('app factory')
@@ -8,6 +26,11 @@ myApp.factory('socket',function($rootScope)
 			var stompClient=Stomp.over(socket);
 			stompClient.connect('','',function(frame)
 			{
-				$rootScope.$broadcast("sockConnected",frame)
-			})
-		})
+				$rootScope.$broadcast('sockConnected',frame)
+			});
+			
+			return{
+				stompClient:stompClient
+			};
+			
+		});

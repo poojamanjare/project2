@@ -1,7 +1,7 @@
 <div class="container">
 <span style="color: red" ng-if="error.code==1">{{error.message}}</span>
 
-<form>
+<form name="myform">
 <h2>Please Sign up here...!!!</h2>
 <div class="form-group">
 Enter Username:
@@ -26,8 +26,9 @@ Enter Lastname:
 
 <div class="form-group">
 Enter Email:
-<input type="email" ng-model="users.email" class="form-control">
+<input type="email" name="email" ng-model="users.email" class="form-control">
 <span style="color: red" ng-if="error.code==3">{{error.message}}</span>
+<span style="color:red" ng-show="myform.email.$error.email">Not a valid e-mail address</span>
 </div>
 
 <div class="form-group">

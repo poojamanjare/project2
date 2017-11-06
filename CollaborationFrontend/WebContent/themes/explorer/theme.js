@@ -11,6 +11,7 @@
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
  */
 (function ($) {
+	alert('themes.js file')
     "use strict";
     var teTagBef = '<tr class="file-preview-frame {frameClass}" id="{previewId}" data-fileindex="{fileindex}"' +
         ' data-template="{template}"', teContent = '<td class="kv-file-content">\n';

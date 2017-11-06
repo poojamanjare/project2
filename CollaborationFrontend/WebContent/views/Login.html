@@ -1,23 +1,26 @@
 <div class="container">
-<span style="color: red">{{error}}</span>
-<span style="color: red">{{errorMsg}}</span>
+<span style="color: red"><b>{{error}}</b></span>
+<span style="color: red"><b>{{errorMsg}}</b></span>
 
-<form>
+<form name="myform" novalidate>
 <h2 align="center">Login Here</h2>
 <div class="imgcontainer" align="center">
     <img src="images/userIcon.png" alt="Avatar" class="avatar" height="25%" width="30%">
 </div>
 <div class="form-group">
 <lable>Enter Username</lable> 
-<input type="text" ng-model="userobj.userId" class="form-control">
+<input type="text" name="userId" ng-model="userobj.userId" class="form-control" required/>
+<span style="color:white" ng-show="myform.userId.$touched && myform.userId.$invalid">Username is required.</span>
 </div>
 
 <div class="form-group">
 <lable>Enter password</lable>
-<input type="password" ng-model="userobj.password" class="form-control">
+<input type="password" name="password" ng-model="userobj.password" class="form-control" required/>
+<span style="color:red" ng-show="myform.password.$dirty && myform.password.$invalid">Password is required.</span>
 </div>
 
-<input type="submit" ng-click="Login()">
+<button type="submit" ng-disabled="myform.userId.$dirty && myform.userId.$invalid || myform.password.$dirty
+ && myform.password.$invalid" ng-click="Login()">Login</button>
 <p class="message">Not registered? <a href="#/Register">Create an account</a></p>
 </form>
 </div>

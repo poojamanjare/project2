@@ -2,24 +2,22 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
- 
- 
- 
- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
-     
-
- <script src="js/fileinput.js" type="text/javascript"></script>
- <script src="themes/explorer/theme.js" type="text/javascript"></script>
- 
- <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css">
- <link href="themes/explorer/theme.css" media="all" rel="stylesheet" type="text/css">
+ <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
   
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    
+     
+    <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    
+    <link href="themes/explorer/theme.css" media="all" rel="stylesheet" type="text/css"/>
+   
+    <script src="js/fileinput.js" type="text/javascript" async="async"></script>
+    <script src="themes/explorer/theme.js" type="text/javascript" async="async"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+     
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
 <link
@@ -28,12 +26,14 @@
 <title>ProfilePicture</title>
 </head>
 <body>
-<div class="container1">
+<form enctype="multipart/formdata">
+<div class="container11">
           	<div>
             	<input class="file" name="image" type="file" 
             		data-upload-url="http://localhost:8085/CollaborationRestServices/uploadProfilePicture"
-            		data-preview-file-type="any"/>
+            		data-preview-file-type="any" />
        	 	</div>
 </div>
+</form>
 </body>
 </html>

@@ -4,47 +4,55 @@
 <style type="text/css">
 body
 {
-background-image: url("images/b.jpg");
- background-size: cover;   
+background-image: url("images/sss.gif");
+   background-size: cover; 
 
 }
 </style>
 <meta charset="utf-8">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.js"></script>
 
 <script src="js/myModule.js"></script>
+<script src="js/sockjs/sockjs.js"></script>
+<script src="js/stomp/dist/stomp.js"></script>
 
 <script src="controller/usercontroller.js"></script>
 <script src="controller/blogpostcontroller.js"></script>
 <script src="controller/blogpostdetailcontroller.js"></script>
 <script src="controller/jobcontroller.js"></script>
 <script src="controller/friendcontroller.js"></script>
+<script src="controller/chatcontroller.js"></script>
+<script src="controller/homecontroller.js"></script>
 
 <script src="services/userservice.js"></script>
 <script src="services/blogpostservice.js"></script>
 <script src="services/jobservice.js"></script>
 <script src="services/friendservice.js"></script>
+<script src="services/chatservice.js"></script>
 
 <script src="js/fileinput.js" type="text/javascript"></script>
  <script src="themes/explorer/theme.js" type="text/javascript"></script>
  
 
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/like.css"/>
+<link rel="stylesheet" href="css/nav.css"/>
 
 </head>
 <body ng-app="myModule" ng-controller="UserController">
 
-<nav class="navbar navbar-inverse" role="navigation">
+<nav role="navigation">
   	<div class="container-fluid">
     		<div class="navbar-header">
       			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -55,7 +63,7 @@ background-image: url("images/b.jpg");
       			</button>
    			</div>
    			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      			<ul class="nav navbar-nav">
+      			<ul>
     					<li class="active"></li>
     					<li><a href="#/Home">Home</a></li>
 						<li><a href="#/AboutUs">About Us</a></li>
@@ -77,7 +85,7 @@ background-image: url("images/b.jpg");
 							</ul>
 						</li>
 						<!--===============================================================================  -->	
-						<li><a href="#/uploadProfilePicture" ng-show="currentUser.userId"><img src="http://localhost:8085/CollaborationRestServices/getProfilePicture/{{currentUser.userId}}" alt="Upload Profile Picture" height="40px" width="40px" class="img-rounded"></a></li>
+						<li><a href="#uploadProfilePicture" ng-show="currentUser.userId"><img src="http://localhost:8085/CollaborationRestServices/getProfilePicture/{{currentUser.userId}}" alt="Upload Profile Picture" height="40px" width="40px" class="img-rounded"></a></li>
 						<li><a href="#/chat" ng-show="currentUser.userId">Chat</a></li>
 						<!-- ==================dropdown for friend========================== -->
 						<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" ng-show="currentUser.userId">Friend<b class="caret"></b></a>
@@ -87,16 +95,32 @@ background-image: url("images/b.jpg");
 								<li><a href="#/listOfFriends">Friends</a></li>
 							</ul>
 						</li>
-					</ul>
+						<!--======================Notification=====================================  -->
+						<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" ng-show="currentUser.userId">
+							<span class="glyphicon glyphicon-globe" ng-click="updateLength()">
+								<span class="rw-number-notification" ng-if="approvalStatusLength>0">{{approvalStatusLength}}</span>
+							</span></a>
+							
+							<ul class="dropdown-menu" >
+								<li ng-repeat="blogPost in blogApprovalStatus">
+									<a href="" ng-click="updateViewedStatus(blogPost)">BlogPost titled <b>"{{blogPost.blogTitle}}"</b>
+									is <span ng-if="blogPost.approved">Approved</span>
+										<span ng-if="!blogPost.approved"><div class="container1">Rejected for the reason {{blogPost.rejectionReason}}</div></span></a>
+								</li>
+							</ul>
+						</li>
+					<!-- </ul> -->
 			
-				<div>
-     				<ul class="nav navbar-nav navbar-right">
-     					<li><a href="#/Login" ng-hide="currentUser.userId">Sign In</a></li>
-     					<li><a href="#" ng-click="Logout()" ng-show="currentUser.userId">Logout</a></li>
+				<!-- <div> -->
+     				<ul class="nav navbar-nav navbar-right"> 
+     					<li><a href="#/Login" ng-hide="currentUser.userId"><i class="fa fa-sign-in" aria-hidden="true"></i>
+     					Sign In</a></li>
+     					<li><a href="#" ng-click="Logout()" ng-show="currentUser.userId">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
 						<li><a href="#/Register" ng-hide="currentUser.userId">Sign Up</a></li>
-						<li><a href="#" ng-show="currentUser.userId">Welcome:{{currentUser.firstName}} {{currentUser.lastName}}</a></li>
+						<li><a href="#" ng-show="currentUser.userId">Welcome:{{currentUser.firstName | uppercase}} {{currentUser.lastName | uppercase}}</a></li>
      				</ul>
-				</div>
+     				</ul>
+				<!-- </div> -->
 			</div>
 		</div>
 </nav>
