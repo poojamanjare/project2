@@ -9,7 +9,7 @@
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
  */
 (function (factory) {
-	alert('Fileinput.js file')
+	//alert('Fileinput.js file')
     "use strict";
     //noinspection JSUnresolvedVariable
     if (typeof define === 'function' && define.amd) { // jshint ignore:line

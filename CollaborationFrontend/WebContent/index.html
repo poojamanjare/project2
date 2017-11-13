@@ -48,6 +48,7 @@ background-image: url("images/sss.gif");
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/like.css"/>
 <link rel="stylesheet" href="css/nav.css"/>
+<link rel="stylesheet" href="css/footer.css"/>
 
 </head>
 <body ng-app="myModule" ng-controller="UserController">
@@ -65,11 +66,14 @@ background-image: url("images/sss.gif");
    			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       			<ul>
     					<li class="active"></li>
-    					<li><a href="#/Home">Home</a></li>
+    					<li><a href="#/Home"><i class="fa fa-home fa-2x" aria-hidden="true"></i></a></li>
 						<li><a href="#/AboutUs">About Us</a></li>
 						<li><a href="#/ContactUs">Contact Us</a></li>
 						
 						<li><a href="#/editProfile" ng-show="currentUser.userId">Edit Profile</a></li>
+						
+						<!--=========================profile picture======================================================  -->	
+						<li><a href="#uploadProfilePicture" ng-show="currentUser.userId"><img src="http://localhost:8085/CollaborationRestServices/getProfilePicture/{{currentUser.userId}}" alt="Upload Profile Picture" height="40px" width="40px" class="img-rounded"></a></li>
 						<!-- ==================dropdown for blogpost========================== -->
 						<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" ng-show="currentUser.userId">Blog<b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -84,9 +88,6 @@ background-image: url("images/sss.gif");
 								<li><a href="#/getAllJobs">Get All Jobs</a></li>
 							</ul>
 						</li>
-						<!--===============================================================================  -->	
-						<li><a href="#uploadProfilePicture" ng-show="currentUser.userId"><img src="http://localhost:8085/CollaborationRestServices/getProfilePicture/{{currentUser.userId}}" alt="Upload Profile Picture" height="40px" width="40px" class="img-rounded"></a></li>
-						<li><a href="#/chat" ng-show="currentUser.userId">Chat</a></li>
 						<!-- ==================dropdown for friend========================== -->
 						<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" ng-show="currentUser.userId">Friend<b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -95,6 +96,9 @@ background-image: url("images/sss.gif");
 								<li><a href="#/listOfFriends">Friends</a></li>
 							</ul>
 						</li>
+						<!-- ============chat=============================================== -->
+						<li><a href="#/chat" ng-show="currentUser.userId">Chat</a></li>
+						
 						<!--======================Notification=====================================  -->
 						<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" ng-show="currentUser.userId">
 							<span class="glyphicon glyphicon-globe" ng-click="updateLength()">
@@ -113,10 +117,9 @@ background-image: url("images/sss.gif");
 			
 				<!-- <div> -->
      				<ul class="nav navbar-nav navbar-right"> 
-     					<li><a href="#/Login" ng-hide="currentUser.userId"><i class="fa fa-sign-in" aria-hidden="true"></i>
-     					Sign In</a></li>
+     					<li><a href="#/Login" ng-hide="currentUser.userId">Sign In <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
      					<li><a href="#" ng-click="Logout()" ng-show="currentUser.userId">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
-						<li><a href="#/Register" ng-hide="currentUser.userId">Sign Up</a></li>
+						<li><a href="#/Register" ng-hide="currentUser.userId">Sign Up <i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
 						<li><a href="#" ng-show="currentUser.userId">Welcome:{{currentUser.firstName | uppercase}} {{currentUser.lastName | uppercase}}</a></li>
      				</ul>
      				</ul>
@@ -126,7 +129,25 @@ background-image: url("images/sss.gif");
 </nav>
 				
 					
-					<div ng-view></div>
+					<div ng-view></div>	
+		
+<footer class="footer">
+      <div>      
+      <lable style="color: white;">About Us</lable>
+      <p style="color: white;">Allin1 is one of Collaboration portal.<br>Here you can create a blog very easily,get description of various jobs,chatting with friends.</p>
+         	
+      <ul class="social-icon animate pull-right">
+                  <li><a href="http://facebook.com" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- change the link to social page and edit title-->
+                  <li><a href="http://twitter.com" title="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="http://googleplus.com" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                  <li><a href="http://linkedin.com" title="linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li> 
+                  <li><a href="http://instagram.com" title="instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+       
+ 
+                </div>
+    </footer>
+
 
 </body>
 </html>

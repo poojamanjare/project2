@@ -90,7 +90,7 @@ myApp.controller('ChatController',['$rootScope','$scope','socket' ,function($roo
 			{
 				$scope.chats.push(chat);
 			}
-			//=======================================================
+			//==================sending chat=====================================
 			$scope.$on('sendingChat',function(event,sentChat)
 			{
 				chat=angular.copy(sentChat);
