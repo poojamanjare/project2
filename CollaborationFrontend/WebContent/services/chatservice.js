@@ -21,9 +21,9 @@ myApp.directive('ngFocus',function()
 		});
 myApp.factory('socket',function($rootScope)
 		{
-			alert('app factory')
+			alert('myApp factory')
 			var socket=new SockJS("/CollaborationRestServices/portfolio");
-			var stompClient=Stomp.over(socket);
+			var stompClient=Stomp.over(socket);		//bind socket with stomp
 			stompClient.connect('','',function(frame)
 			{
 				$rootScope.$broadcast('sockConnected',frame)

@@ -64,7 +64,7 @@ myApp.config(function($routeProvider)
 			})
 			
 			.when("/uploadProfilePicture",{
-				templateUrl:"views/profilePicture.html"
+				templateUrl:"views/profilePicture.html"	
 			})
 			
 			.when("/getSuggestedUsers",{				//c to v-->select query-->from backend to frontend

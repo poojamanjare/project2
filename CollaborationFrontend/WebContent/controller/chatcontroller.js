@@ -6,9 +6,9 @@ myApp.controller('ChatController',['$rootScope','$scope','socket' ,function($roo
 			alert('Entering ChatController')
 			$scope.chats=[];	//array of chat messages
 			$scope.users=[];	//array of userIds in chatroom
-			$scope.stompClient=socket.stompClient
+			$scope.stompClient=socket.stompClient	//scope variable is assigned as service stompclient
 			
-			$scope.$on('sockConnected',function(event,frame)	//here sockConnected is id
+			$scope.$on('sockConnected',function(event,frame)	
 			{
 				alert('SockConnected')
 				$scope.userName=$rootScope.currentUser.userId

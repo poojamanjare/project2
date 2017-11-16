@@ -6,6 +6,8 @@
 <table class="table table-hover table-condenced">
 <tbody>
 <h3 style="text-align: center; color: #D2691E;"><b>Suggested Users...</b></h3>
+<br>
+<br>
 <tr ng-repeat="user in suggestedUsers">
 
 <td>{{user.userId}}</td>
@@ -14,8 +16,8 @@
 <td>{{user.email}}</td>
 <td ng-if="user.isOnline">YES</td>
 <td ng-if="!user.isOnline">NO</td>
-<td><img src="http://localhost:8085/CollaborationRestServices/getProfilePicture/{{user.userId}}"></td>
-<td><a class="btn btn-default" ng-click="sendFriendRequest(user.userId)">Send Friend Request</a></td>
+<td><img src="http://localhost:8085/CollaborationRestServices/getProfilePicture/{{user.userId}}" height="40px" width="40px" class="img-rounded"></td>
+<td><button class="btn btn-primary" ng-click="sendFriendRequest(user.userId)">Send Friend Request</button></td>
 
 </tr>
 </tbody>

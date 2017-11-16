@@ -22,14 +22,13 @@ public class WebResolver
 		System.out.println("view Resolver created successfully(webResolver)....");
 		return internalResourceViewResolver;
 	}
-	@Bean(name="multiPartResolver")
-	public  CommonsMultipartResolver getCommonsMultipartResolver()
-	{
-		CommonsMultipartResolver commonsMultipartResolver=new CommonsMultipartResolver();
-		commonsMultipartResolver.setMaxUploadSize(20971520);//20MB
-		commonsMultipartResolver.setMaxInMemorySize(1048576);//1MB
-		return commonsMultipartResolver;
-	}
+	@Bean(name = "multipartResolver")
+	public CommonsMultipartResolver getCommonsMultipartResolver() {
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setMaxUploadSize(20971520); // 20MB
+		multipartResolver.setMaxInMemorySize(1048576);	// 1MB
+		return multipartResolver;
+}
 	/*@Bean(name="mailSender")
 	public JavaMailSenderImpl getJavaMailSenderImpl()
 	{

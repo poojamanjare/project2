@@ -10,7 +10,7 @@
 <div class="form-group">
 <lable>Enter Username</lable> 
 <input type="text" name="userId" ng-model="userobj.userId" class="form-control" required/>
-<span style="color:white" ng-show="myform.userId.$touched && myform.userId.$invalid">Username is required.</span>
+<span style="color:red" ng-show="myform.userId.$touched && myform.userId.$invalid">Username is required.</span>
 </div>
 
 <div class="form-group">
@@ -24,3 +24,20 @@
 <p class="message">Not registered? <a href="#/Register">Create an account</a></p>
 </form>
 </div>
+<footer class="footer" style="position: relative;">
+      <div style="color: white;">      
+      <a data-target="#demo" data-toggle="collapse" style="color: white;font-size: medium; text-decoration: none; ">About Us</a>
+         		<div id="demo" class="collapse in">
+      <p>Allin1 is one of Collaboration portal.<br>Here you can create a blog very easily,get description of various jobs,chatting with friends.</p>
+         	</div>
+      <ul class="social-icon animate pull-right">
+                  <li><a href="http://facebook.com" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- change the link to social page and edit title-->
+                  <li><a href="http://twitter.com" title="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="http://googleplus.com" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                  <li><a href="http://linkedin.com" title="linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li> 
+                  <li><a href="http://instagram.com" title="instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+       
+ 
+                </div>
+    </footer>

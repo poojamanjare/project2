@@ -5,13 +5,19 @@
 <h2>Please Sign up here...!!!</h2>
 <div class="form-group">
 Enter Username:
-<input type="text" ng-model="users.userId" class="form-control">
+<input type="text" name="userId" ng-model="users.userId" class="form-control" required ng-minlength="4" ng-maxlength="10">
+<span ng-show="myform.userId.$error.minlength || myform.userId.$error.maxlength" style="color:red">User name should be 4-10 characters</span>
 <span style="color: red" ng-if="error.code==2">{{error.message}}</span>
 </div>
 
 <div class="form-group">
 Enter Password:
-<input type="password" ng-model="users.password" class="form-control">
+<input type="password" name="password" id="userpass" ng-model="users.password" class="form-control">
+</div>
+
+<div class="form-group">
+Confirm Password:
+<input type="password" name="C_Pass_Word" id="cpass" class="form-control" name="Confirm Password" required onblur="checkPass()">
 </div>
 
 <div class="form-group">
@@ -33,16 +39,50 @@ Enter Email:
 
 <div class="form-group">
 Enter Phone Number:
-<input type="text" ng-model="users.phonenumber" class="form-control">
+<input type="text" name="phonenumber" ng-model="users.phonenumber" class="form-control" required ng-minlength="10" ng-maxlength="10">
+<p ng-show="myform.phonenumber.$error.minlength || myform.phonenumber.$error.maxlength " style="color:red">Phone number should be of 10 digits</p>
 </div>
 
 <div class="form-group">
 Select Role:
-<input type="radio" ng-model="users.role" value="STUDENT">Student
-<input type="radio" ng-model="users.role" value="EMPLOYEE">Employee
-<input type="radio" ng-model="users.role" value="ALUMINI">Alumini
+<input type="radio" ng-model="users.role" value="STUDENT" >Student&nbsp;&nbsp;
+<input type="radio" ng-model="users.role" value="EMPLOYEE" >Employee&nbsp;&nbsp;
+<input type="radio" ng-model="users.role" value="ALUMINI" >Alumini
 </div>
 
-<input type="submit" value="Register" ng-click="createUsers()">
+<button type="submit" value="Register" ng-click="createUsers()" ng-disabled="signupform.$invalid">Sign up</button>
 </form>
 </div>
+<script type="text/javascript">
+function checkPass()
+{
+	var x=document.getElementById("userpass").value;
+	var y=document.getElementById("cpass").value;
+	if(x!=y)
+	{
+		alert("Passwords do not match");
+		document.getElementById("cpass").focus();
+		
+	}
+	
+}
+</script>
+
+
+<footer class="footer" style="position: relative;">
+       <div style="color: white;">      
+      <a data-target="#demo" data-toggle="collapse" style="color: white;font-size: medium; text-decoration: none; ">About Us</a>
+         		<div id="demo" class="collapse in">
+      <p>Allin1 is one of Collaboration portal.<br>Here you can create a blog very easily,get description of various jobs,chatting with friends.</p>
+         	</div>
+      <ul class="social-icon animate pull-right">
+                  <li><a href="http://facebook.com" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li> <!-- change the link to social page and edit title-->
+                  <li><a href="http://twitter.com" title="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="http://googleplus.com" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                  <li><a href="http://linkedin.com" title="linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li> 
+                  <li><a href="http://instagram.com" title="instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+       
+ 
+                </div>
+    </footer>

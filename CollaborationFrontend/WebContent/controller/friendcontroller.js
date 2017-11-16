@@ -58,7 +58,7 @@ myApp.controller('FriendController',function($scope,$location,FriendService)
 				console.log(request)	//it will show all values
 				console.log(request.status)	//P
 				request.status=statusValue	//status value is either A or D
-				console.log(request.status)	//A or D
+				console.log(request.status)	//A or D(change status)
 				console.log(request)	//it will show all values but status value get changed
 				FriendService.updatePendingRequests(request)
 				.then

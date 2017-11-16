@@ -43,7 +43,7 @@ public class SocketController
 		
 	}
 	//=============================================================================
-	@MessageMapping(value="/chat")
+	@MessageMapping(value="/chat")		//iff the msg is snd to dest
 	public void chatRecevied(Chat chat)
 	{
 		if("all".equals(chat.getTo()))	//group chat
