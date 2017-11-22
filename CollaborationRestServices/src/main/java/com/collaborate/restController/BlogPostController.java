@@ -46,7 +46,7 @@ public class BlogPostController
 		}
 		
 		blogPost.setPostedOn(new Date());
-		Users postedBy=userService.getUserByUserId(userId);
+		Users postedBy=userService.getUserById(userId);
 		blogPost.setPostedBy(postedBy); 		//postedBy is an object of type Users
 		try
 		{

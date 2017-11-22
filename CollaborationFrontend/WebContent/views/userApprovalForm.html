@@ -1,0 +1,34 @@
+<div class="container">
+<div class="row">
+<div>
+<div class="panel panel-default">
+<div class="panel heading">
+<div><h3>UserId: {{users.userId}}</h3></div>
+<span><strong>EMail::</strong>{{users.email}}</span>
+<br>
+<span><strong>Firstname::</strong>{{users.firstName}}</span><br>
+<span><strong>lastname::</strong>{{users.lastName}}</span><br>
+<span><strong>Role::</strong>{{users.role}}</span>
+
+
+</div>
+</div>
+</div>
+
+<div>
+
+<!-- <b>Approval Form of users</b> -->
+<form>
+<div class="form-group">
+<input type="radio" ng-model="users.status" value="true" ng-click="showRejectionText(false)">Approve
+<input type="radio" ng-model="users.status" value="false" ng-click="showRejectionText(true)">Reject
+<p ng-show="isRejected">
+Enter Rejection Reason::
+<textarea rows="5" cols="30" ng-model="users.rejectReason" class="form-control"></textarea>
+</p>
+</div>
+<button type="submit" value="update" ng-click="approveUser()">Update</button>
+</form>
+
+</div>
+</div>

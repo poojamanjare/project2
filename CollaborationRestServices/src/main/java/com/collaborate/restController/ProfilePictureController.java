@@ -37,7 +37,7 @@ public class ProfilePictureController
 	{
 		
 		String userId=(String) session.getAttribute("userId");
-		Users users=usersDAO.getUserByUserId(userId);
+		Users users=usersDAO.getUserById(userId);
 		if(users==null)
 		{
 			Error error=new Error(5,"Unauthorized");
@@ -53,8 +53,8 @@ public class ProfilePictureController
 	//=================================================================================================
 	@RequestMapping(value="/getProfilePicture/{userId}", method=RequestMethod.GET)		//To get the profile pic of particular User
 	public @ResponseBody byte[] getProfilePic(@PathVariable String userId,HttpSession session){
-		String username1=(String) session.getAttribute("userId");
-		Users users=usersDAO.getUserByUserId(username1);
+		String userId1=(String) session.getAttribute("userId");
+		Users users=usersDAO.getUserById(userId1);
 		if(users==null)
 			return null;
 		else

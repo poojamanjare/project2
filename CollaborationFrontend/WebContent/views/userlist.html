@@ -1,0 +1,68 @@
+<div class="container">
+<div ng-show="currentUser.role=='ADMIN'">         
+<B style="color:#D2691E;">Lists of Users Waiting for approval</B>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>UserId</th>
+<th>Email</th>
+<th>Name</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="users in listOfUsersWaitingForApproval">   
+<td><a href="#/getUserApprovalForm/{{users.userId}}">{{users.userId}}</a></td>		
+<td>{{users.email}}</td>
+<td>{{users.firstName}} {{users.lastName}}</td>
+<td>{{users.role}}</td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+<br>
+<!--=================================================================================  -->
+	<div style="text-align: center; padding: 10px;">
+		<input type="text" ng-model="searchText" placeholder="Search Users...">
+	</div>
+
+	<div class="col-lg-12">
+		<b style="color:#D2691E;">List of approved users</b>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>UserId</th>
+					<th>Email</th>
+					<th>Name</th>
+					<th>Role</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="users in listOfUsersApproved | filter:searchText">
+					<td>{{users.userId}}</td>
+					<td>{{users.email}}</td>
+					<td>{{users.firstName}} {{users.lastName}}</td>
+					<td>{{users.role}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<footer class="footer" style="position: relative;">
+      <div style="color: white;">      
+      <a data-target="#demo" data-toggle="collapse" style="color: white;font-size: medium; text-decoration: none; ">About Us</a>
+         		<div id="demo" class="collapse in">
+      <p>Allin1 is one of Collaboration portal.<br>Here you can create a blog very easily,get description of various jobs,chatting with friends.</p>
+         	</div>
+      <ul class="social-icon animate pull-right">
+                  <li><a href="http://facebook.com" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="http://twitter.com" title="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="http://googleplus.com" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                  <li><a href="http://linkedin.com" title="linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li> 
+                  <li><a href="http://instagram.com" title="instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+       
+ 
+                </div>
+    </footer>

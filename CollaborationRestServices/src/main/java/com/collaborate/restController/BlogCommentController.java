@@ -44,7 +44,7 @@ public class BlogCommentController
 			Error error=new Error(5, "unauthorized access...");
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);//unauthorized
 		}
-		Users users=userService.getUserByUserId(userId);
+		Users users=userService.getUserById(userId);
 		blogComment.setCommentedBy(users);
 		blogComment.setCommentedOn(new Date());
 		try

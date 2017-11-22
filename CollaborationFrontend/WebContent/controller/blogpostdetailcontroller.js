@@ -22,7 +22,7 @@ myApp.controller('BlogPostDetailController',function($scope,$location,BlogPostSe
 							$location.path('/Login')
 					}
 				)
-				
+			//=============update blogpost after approved or reject====================================	
 			/*update approved/rejectionReason in blogPost table 
 			 * update blogPost set approved=1 where blogid=?
 			 * (or)
@@ -58,7 +58,6 @@ myApp.controller('BlogPostDetailController',function($scope,$location,BlogPostSe
 				{
 				$scope.blogPost.likes=$scope.blogPost.likes - 1//2nd click
 				}
-			
 			//update blogpost set likes=? where blogid=?
 			BlogPostService.updateBlogPost($scope.blogPost)
 			.then
@@ -75,6 +74,7 @@ myApp.controller('BlogPostDetailController',function($scope,$location,BlogPostSe
 				})
 		}
 	
+		//==================show rejection text========================================
 		$scope.showRejectionText=function(val)
 		{
 			$scope.isRejected=val	//true/false
@@ -107,6 +107,7 @@ myApp.controller('BlogPostDetailController',function($scope,$location,BlogPostSe
 					})
 		}
 		
+		//=====================get blog comment=========================================
 		function getBlogComments()	//select blogcomments for particular blogpost
 		{
 			BlogPostService.getBlogComments(blogId)

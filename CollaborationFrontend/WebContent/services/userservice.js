@@ -11,6 +11,28 @@ myApp.factory('UserService',function($http)
 					return $http.post(BASE_URL+"/createUsers",users)
 				}
 			
+				UserService.getUserById=function(userId)
+				{
+					console.log("userId:"+userId)
+					return $http.get(BASE_URL+"/getUserById/"+userId)
+				}
+			
+				UserService.usersApproved=function()
+				{
+					return $http.get(BASE_URL+"/getApproveUsers/"+1)		//select * from blogpost where status='1';
+				}
+			
+				UserService.userWaitingForApproval=function()
+				{
+					return $http.get(BASE_URL+"/getApproveUsers/"+0)	//select * from blogpost where status='0';
+				}
+				
+				UserService.approveUser=function(users)
+				{
+					console.log(users)
+					return $http.put(BASE_URL+"/approveUser",users)
+				}
+				
 				UserService.Login=function(userobj)
 				{
 					return $http.post(BASE_URL+"/Login",userobj)

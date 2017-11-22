@@ -21,6 +21,16 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
 	}
+	/* .con {
+  position: relative;
+  z-index: 1;
+  
+  max-width: 500px;
+  margin: auto;
+  padding: 45px;
+  text-align: left;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+} */
 .form {
   position: relative;
   z-index: 1;

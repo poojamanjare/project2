@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +40,7 @@ public class UserController
 	
 	//============method for creating user===============================
 	@PostMapping(value="/createUsers")
-	public ResponseEntity<?>createUsers(@RequestBody Users users)
+	public ResponseEntity<?>createUsers(@Valid @RequestBody Users users,BindingResult bindingResult)
 	{
 		System.out.println("##################"+users.getUserId()+"##############");
 		if(!userService.isUserIdValid(users.getUserId()))
@@ -63,7 +65,45 @@ public class UserController
 			return new ResponseEntity<Error>(error,HttpStatus.INTERNAL_SERVER_ERROR);//500
 		}
 	}
-	//============login=================================
+	//================================approved users==========================================
+	@GetMapping(value="/getApproveUsers/{status}")
+	public ResponseEntity<?>getUsers(@PathVariable int status,HttpSession session)
+	{
+		System.out.println("approving users..........");
+		String userId=(String) session.getAttribute("userId");
+		if(userId==null)
+		{
+			Error error=new Error(5, "unauthorized access...");
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);//unauthorized
+		}
+		List<Users>users=userService.getUsers(status);
+		return new ResponseEntity<List<Users>>(users, HttpStatus.OK);
+	}
+	
+	//=========================update users(approved/reject)==========================================================
+		@PutMapping(value="/approveUser")
+		public ResponseEntity<?>approveUser(@RequestBody Users users,HttpSession session)
+		{
+			System.out.println("in usercontroller=====approve user==update");
+			String userId=(String) session.getAttribute("userId");
+			if(userId==null)
+			{
+				Error error=new Error(5, "unauthorized access...");
+				return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);//unauthorized
+			}
+			//admin has reject the user but reason is not mentioned
+			/*if(!users.isStatus() && users.getRejectReason()==null)	//status=0 and rejectReason=null
+			{
+				users.setRejectReason("Not Mentioned");
+			}*/
+			
+			userService.update(users);
+			return new ResponseEntity<Users>(users,HttpStatus.OK);
+		}
+	
+	
+	
+	//===================================login===================================
 	@PostMapping(value="/Login")
 	public ResponseEntity<?>Login(@RequestBody Users users,HttpSession session)
 	{
@@ -103,13 +143,28 @@ public class UserController
 			Error error=new Error(5, "Unauthorized access...please login first");
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 		}
-		Users users=userService.getUserByUserId(userId);
+		Users users=userService.getUserById(userId);
 		users.setIsOnline("No");
 		userService.update(users);
 		session.removeAttribute("userId");
 		session.invalidate();
 		return new ResponseEntity<Users>(users, HttpStatus.OK);
 		
+	}
+	//==================get user by id=======================
+	@GetMapping(value="/getUserById/{userId}")
+	public ResponseEntity<?>getUserById(@PathVariable String userId,HttpSession session)
+	{
+		System.out.println("get user by id::approved..........");
+		String userId1=(String) session.getAttribute("userId");
+		System.out.println(userId1);
+		if(userId1==null)
+		{
+			Error error=new Error(5, "unauthorized access...");
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);//unauthorized
+		}
+		Users users=userService.getUserById(userId);
+		return new ResponseEntity<Users>(users, HttpStatus.OK);
 	}
 	//===========================get user===========================================
 	@GetMapping(value="/getUser")
@@ -121,10 +176,10 @@ public class UserController
 			Error error=new Error(7, "Unauthorized access...please login first");
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 		}
-		Users users=userService.getUserByUserId(userId);
+		Users users=userService.getUserById(userId);
 		return new ResponseEntity<Users>(users,HttpStatus.OK);
 	}
-	//===================update user profile==================================
+	//================================update user profile==================================
 	@PutMapping(value="/updateUser")
 	public ResponseEntity<?>updateUser(@RequestBody Users users,HttpSession session)
 	{

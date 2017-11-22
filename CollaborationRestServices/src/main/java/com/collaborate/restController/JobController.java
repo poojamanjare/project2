@@ -42,7 +42,7 @@ public class JobController
 		}
 		
 		//check user role
-		Users users=userService.getUserByUserId(userId);
+		Users users=userService.getUserById(userId);
 		if(!users.getRole().equals("ADMIN"))	//if userRole is not equals to ADMIN
 		{
 			Error error=new Error(6, "Access Denied");

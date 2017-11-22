@@ -1,3 +1,23 @@
+<head>
+
+<style>
+	.err
+	{
+	color:red;
+	}
+	.bdr
+	{
+	border:1px solid black;
+	}
+	.err_bdr
+	{
+	border:1px solid red;
+	}
+</style>
+
+</head>
+
+
 <div class="container">
 <span style="color: red" ng-if="error.code==1">{{error.message}}</span>
 
@@ -5,8 +25,8 @@
 <h2>Please Sign up here...!!!</h2>
 <div class="form-group">
 Enter Username:
-<input type="text" name="userId" ng-model="users.userId" class="form-control" required ng-minlength="4" ng-maxlength="10">
-<span ng-show="myform.userId.$error.minlength || myform.userId.$error.maxlength" style="color:red">User name should be 4-10 characters</span>
+<input type="text" name="userId" ng-model="users.userId" class="form-control">
+<!-- <span ng-show="myform.userId.$error.minlength || myform.userId.$error.maxlength" style="color:red">User name should be 4-10 characters</span> -->
 <span style="color: red" ng-if="error.code==2">{{error.message}}</span>
 </div>
 
@@ -21,6 +41,7 @@ Confirm Password:
 </div>
 
 <div class="form-group">
+<p class="err" path="firstName"></p>
 Enter Firstname:
 <input type="text" ng-model="users.firstName" class="form-control">
 </div>
@@ -34,13 +55,13 @@ Enter Lastname:
 Enter Email:
 <input type="email" name="email" ng-model="users.email" class="form-control">
 <span style="color: red" ng-if="error.code==3">{{error.message}}</span>
-<span style="color:red" ng-show="myform.email.$error.email">Not a valid e-mail address</span>
+<!-- <span style="color:red" ng-show="myform.email.$error.email">Not a valid e-mail address</span> -->
 </div>
 
 <div class="form-group">
 Enter Phone Number:
-<input type="text" name="phonenumber" ng-model="users.phonenumber" class="form-control" required ng-minlength="10" ng-maxlength="10">
-<p ng-show="myform.phonenumber.$error.minlength || myform.phonenumber.$error.maxlength " style="color:red">Phone number should be of 10 digits</p>
+<input type="text" name="phonenumber" ng-model="users.phonenumber" class="form-control">
+<!-- <p ng-show="myform.phonenumber.$error.minlength || myform.phonenumber.$error.maxlength " style="color:red">Phone number should be of 10 digits</p> -->
 </div>
 
 <div class="form-group">

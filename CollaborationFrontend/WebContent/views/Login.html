@@ -2,7 +2,7 @@
 <span style="color: red"><b>{{error}}</b></span>
 <span style="color: red"><b>{{errorMsg}}</b></span>
 
-<form name="myform" novalidate>
+<form name="myform" novalidate>    <!-- action="perform_login" -->
 <h2 align="center">Login Here</h2>
 <div class="imgcontainer" align="center">
     <img src="images/userIcon.png" alt="Avatar" class="avatar" height="25%" width="30%">
@@ -22,6 +22,8 @@
 <button type="submit" ng-disabled="myform.userId.$dirty && myform.userId.$invalid || myform.password.$dirty
  && myform.password.$invalid" ng-click="Login()">Login</button>
 <p class="message">Not registered? <a href="#/Register">Create an account</a></p>
+<!-- <input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" /> -->
 </form>
 </div>
 <footer class="footer" style="position: relative;">

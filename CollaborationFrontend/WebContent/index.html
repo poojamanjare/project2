@@ -10,7 +10,9 @@ background-image: url("images/sss.gif");
 }
 </style>
 <meta charset="utf-8">
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -18,9 +20,7 @@ background-image: url("images/sss.gif");
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.js"></script>
+
 
 
 <script src="js/myModule.js"></script>
@@ -34,7 +34,7 @@ background-image: url("images/sss.gif");
 <script src="controller/friendcontroller.js"></script>
 <script src="controller/chatcontroller.js"></script>
 <script src="controller/homecontroller.js"></script>
-<!-- <script src="controller/profilepicturecontroller.js"></script> -->
+<script src="controller/userdetailcontroller.js"></script>
 
 <script src="services/userservice.js"></script>
 <script src="services/blogpostservice.js"></script>
@@ -73,7 +73,7 @@ background-image: url("images/sss.gif");
     					<li><a href="#/Home"><i class="fa fa-home fa-2x" aria-hidden="true"></i></a></li>
 						<!-- <li><a href="#/AboutUs">About Us</a></li> -->
 						<li><a href="#/ContactUs">Contact Us</a></li>
-						
+						<li><a href="#/approveUser" ng-show="currentUser.role=='ADMIN'">Approve Users</a></li>
 						<li><a href="#/editProfile" ng-show="currentUser.userId">Edit Profile</a></li>
 						
 						<!--=========================profile picture======================================================  -->	

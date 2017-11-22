@@ -31,17 +31,25 @@ myApp.config(function($routeProvider)
 				controller:"UserController"				
 			})
 			
+			.when("/approveUser",{						//controller to view
+				templateUrl:"views/userlist.html",
+				controller:"UserController"				
+			})
+			
+			.when("/getUserApprovalForm/:userId",{ 				
+				templateUrl:"views/userApprovalForm.html",	
+				controller:"UserDetailController"				
+			})
+			
 			.when("/addBlogPost",{							//view to controller
 				templateUrl:"views/BlogPostForm.html",
 				controller:"BlogPostController"				
 			})
 			
-			.when("/getBlogs",{						//cintroller to view
+			.when("/getBlogs",{								//controller to view
 				templateUrl:"views/blogslist.html",
 				controller:"BlogPostController"				
 			})
-			
-			
 			
 			.when("/getBlogById/:blogId",{					//blogs approved
 				templateUrl:"views/blogDetails.html",		//details of approved blogs //blogPost + textarea
